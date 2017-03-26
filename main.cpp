@@ -20,22 +20,24 @@ int main(int argc, char* argv[]) {
     int n = 0;
     Complex* vectors[VEC_NUM] = {nullptr, nullptr};
 
-    create_vectors(file, vectors, n);
+    if (create_vectors(file, vectors, n)) {
+        file.close();
 
-    Complex sum[n];
+        Complex sum[n];
 
-    for(int i = 0; i < VEC_NUM; i++) {
-        for(int j = 0; j < n; j++)
-            std::cout << vectors[i][j] << " ";
+        for (int i = 0; i < VEC_NUM; i++) {
+            for (int j = 0; j < n; j++)
+                std::cout << vectors[i][j] << "| ";
+            std::cout << std::endl;
+        }
+
+        sum_vectors(sum, vectors, n);
+
+        std::cout << std::endl;
+        for (int j = 0; j < n; j++)
+            std::cout << sum[j] << "| ";
         std::cout << std::endl;
     }
-
-    sum_vectors(sum, vectors, n);
-
-    std::cout << std::endl;
-    for(int j = 0; j < n; j++)
-        std::cout << sum[j] << " ";
-    std::cout << std::endl;
 
     return 0;
 }
